@@ -1,23 +1,27 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { setWeatherData } from './redux/actions';
 import { getCurrentWeather } from "./api";
+// eslint-disable-next-line
+import { Observable } from 'rxjs';
 
 const Weather = ({ weatherData, setWeatherData }) => {
     const city = 'Moscow';
 
-    const fetchData = useCallback(async () => {
-        try {
-            const data = await getCurrentWeather(city);
-            setWeatherData(data);
-        } catch (error) {
-            console.error('Error fetching weather data:', error);
-        }
-    }, [city, setWeatherData]);
-
     useEffect(() => {
-        fetchData();
-    }, [fetchData]);
+        const subscription = getCurrentWeather(city).subscribe({
+            next: (data) => {
+                setWeatherData(data);
+            },
+            error: (error) => {
+                console.error('Error fetching weather data:', error);
+            },
+        });
+
+        return () => {
+            subscription.unsubscribe();
+        };
+    }, [city, setWeatherData]);
 
     return (
         <div>
