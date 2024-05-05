@@ -1,0 +1,26 @@
+input {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: inherit;
+    font-size: inherit;
+    box-sizing: border-box;
+    margin: 50px 10px 40px 0px;
+}
+
+.buttonFind {
+    text-decoration: none;
+    display: inline-block;
+    color: white;
+    padding: 10px 15px;
+    margin: 10px 20px;
+    border-radius: 10px;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background-image: linear-gradient(to right, #9EEFE134 0%, #4830F0 51%, #4830F0 100%);
+    background-size: 200% auto;
+    box-shadow: 0 0 20px rgba(0, 15, 0, .1);
+    transition: .5s;
+}

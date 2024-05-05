@@ -1,26 +1,34 @@
-import { Observable } from 'rxjs';
-import axios from 'axios';
+// api.js
 
-const API_KEY = '8dbc221482a18e9ea33762e4a36b208d';
-const baseURL = 'https://api.openweathermap.org/data/2.5/weather';
-
-const getCurrentWeather = (city) => {
-    return new Observable((observer) => {
-        axios.get(baseURL, {
-            params: {
-                q: city,
-                appid: API_KEY,
-                units: 'metric',
-            },
-        })
-            .then((response) => {
-                observer.next(response.data);
-                observer.complete();
-            })
-            .catch((error) => {
-                observer.error(error);
-            });
-    });
+// Функция для получения текущей погоды по городу
+export const getCurrentWeather = async (city) => {
+    try {
+        // Здесь должен быть ваш код для отправки запроса к API погоды
+        // Например, с использованием fetch или axios
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=8dbc221482a18e9ea33762e4a36b208d`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch weather data');
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        throw new Error(`Error fetching current weather data: ${error.message}`);
+    }
 };
 
-export { getCurrentWeather };
+// Функция для получения прогноза погоды по городу и периоду (daily или weekly)
+export const getForecast = async (city, period) => {
+    try {
+        // Здесь должен быть ваш код для отправки запроса к API погоды
+        // Например, с использованием fetch или axios
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&mode=json&appid=8dbc221482a18e9ea33762e4a36b208d`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch forecast data');
+        }
+        const data = await response.json();
+        // Здесь может быть дополнительная обработка данных, чтобы вернуть только необходимую часть прогноза
+        return data;
+    } catch (error) {
+        throw new Error(`Error fetching forecast data: ${error.message}`);
+    }
+};

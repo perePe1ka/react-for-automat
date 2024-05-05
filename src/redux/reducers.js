@@ -1,7 +1,10 @@
-import { SET_WEATHER_DATA } from './actions';
+// reducers.js
+
+import { SET_WEATHER_DATA, SET_SELECTED_CITY } from './actions';
 
 const initialState = {
     weatherData: null,
+    selectedCity: 'Moscow', // Значение по умолчанию
 };
 
 const weatherReducer = (state = initialState, action) => {
@@ -10,6 +13,11 @@ const weatherReducer = (state = initialState, action) => {
             return {
                 ...state,
                 weatherData: action.payload,
+            };
+        case SET_SELECTED_CITY:
+            return {
+                ...state,
+                selectedCity: action.payload,
             };
         default:
             return state;

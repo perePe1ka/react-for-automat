@@ -1,3 +1,5 @@
+//store.js
+
 import { createStore } from 'redux';
 import weatherReducer from './reducers';
 

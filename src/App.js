@@ -1,31 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Weather from './Weather';
-
-import List from './components/List';
-import TextInput from './components/TextInput';
-import Heading from './components/Heading';
-import Button from './components/Button';
-import CitySelector from './components/CitySelector'; // Добавляем импорт
-
-import store from './redux/store';
+import WeatherForm from './components/WeatherForm'; // Один раз
+import WeatherForecast from './components/WeatherForecast';
 import { Provider } from "react-redux";
+import store from './redux/store';
 
 function App() {
-    const [selectedCity, setSelectedCity] = useState('Moscow');
-
-    const handleCityChange = (city) => {
-        setSelectedCity(city);
-    };
-
     return (
         <Provider store={store}>
             <div className="App">
-                <CitySelector onCityChange={handleCityChange} /> {}
-                <Weather /> {}
-                <List items={['Item 1', 'Item 2', 'Item 3']} />
-                <TextInput value="" onChange={() => {}} />
-                <Heading level={3}>Click the Button</Heading>
-                <Button onClick={() => alert('Button clicked!')}>Click me</Button>
+                <WeatherForm /> {/* Используем компонент WeatherForm здесь */}
+                <Weather />
+                <WeatherForecast />
             </div>
         </Provider>
     );
